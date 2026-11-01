@@ -1,0 +1,24 @@
+{
+    "geode": "5.11.2",
+    "version": "0.1.0",
+    "id": "exodi.nameplate",
+    "name": "Nameplate",
+    "developer": "Exodi",
+    "description": "Draws your own username in a pickable font with a two-colour gradient fill and outline.",
+    "gd": {
+        "android": "2.2091"
+    },
+    "repository": "https://github.com/Exodi-dio/nameplate",
+    "links": {
+        "source": "https://github.com/Exodi-dio/nameplate"
+    },
+    "issues": {
+        "info": "Only your own profile is affected, and only on your device. The mod cannot display a name other than your account name."
+    },
+    "tags": [
+        "customization",
+        "interface",
+        "offline",
+        "enhancement"
+    ]
+}

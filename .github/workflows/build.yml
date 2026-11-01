@@ -1,0 +1,58 @@
+name: Build Nameplate
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [Android32, Android64]
+    name: ${{ matrix.target }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Pillow for the font baker
+        run: pip install pillow
+
+      - name: Bake bundled font atlases
+        run: python tools/bake.py
+
+      - name: Build
+        uses: geode-sdk/build-geode-mod@main
+        with:
+          sdk: "nightly"
+          target: ${{ matrix.target }}
+          build-config: Release
+          combine: true
+
+  package:
+    name: Package builds
+    runs-on: ubuntu-latest
+    needs: [build]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Combine builds
+        uses: geode-sdk/build-geode-mod/combine@main
+        with:
+          zstd: true
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Build Output
+          path: ${{ steps.build.outputs.build-output }}
