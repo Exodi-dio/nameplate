@@ -6,7 +6,7 @@
 
 using namespace geode::prelude;
 
-class $modify(ProfilePage) {
+class $modify(NameplateProfilePage, ProfilePage) {
 
     void loadPageFromUserInfo(GJUserScore* score) {
         ProfilePage::loadPageFromUserInfo(score);
@@ -36,7 +36,7 @@ class $modify(ProfilePage) {
         // open button
         auto btn = CCMenuItemSpriteExtra::create(
             CCSprite::createWithSpriteFrameName("GJ_editIcon_001.png"),
-            this, menu_selector(ProfilePage::onNameplate)
+            this, menu_selector(NameplateProfilePage::onNameplate)
         );
         btn->setID("nameplate-open"_spr);
         btn->setPosition({246.f, 126.f});
