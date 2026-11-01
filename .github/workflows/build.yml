@@ -46,13 +46,32 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Combine builds
-        uses: geode-sdk/build-geode-mod/combine@main
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
         with:
-          zstd: true
+          path: artifacts
+          merge-multiple: false
+
+      - name: Set up geode CLI
+        uses: robinraju/release-downloader@v1.13
+        with:
+          repository: geode-sdk/cli
+          latest: true
+          tarBall: false
+          zipBall: false
+          fileName: "*-linux.zip"
+          extract: true
+          out-file-path: ./cli
+      - run: echo "$PWD/cli" >> $GITHUB_PATH
+
+      - name: Merge platform geodes
+        run: |
+          geode package merge --zstd \
+            artifacts/geode-build-android32/exodi.nameplate.geode \
+            artifacts/geode-build-android64/exodi.nameplate.geode
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: Build Output
-          path: ${{ steps.build.outputs.build-output }}
+          path: artifacts/geode-build-android32/exodi.nameplate.geode
