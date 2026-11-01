@@ -1,5 +1,6 @@
 #include <Geode/Geode.hpp>
 #include <Geode/utils/NodeIDs.hpp>
+#include <Geode/modify/ProfilePage.hpp>
 #include "Render.hpp"
 #include "Popup.hpp"
 
@@ -35,7 +36,7 @@ class $modify(ProfilePage) {
         // open button
         auto btn = CCMenuItemSpriteExtra::create(
             CCSprite::createWithSpriteFrameName("GJ_editIcon_001.png"),
-            this, menu_selector(onNameplate)
+            this, menu_selector(ProfilePage::onNameplate)
         );
         btn->setID("nameplate-open"_spr);
         btn->setPosition({246.f, 126.f});

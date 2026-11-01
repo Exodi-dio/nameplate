@@ -1,7 +1,6 @@
 #include "Popup.hpp"
 
 #include <algorithm>
-#include <Geode/utils/CCColor.hpp>
 
 using namespace geode::prelude;
 
