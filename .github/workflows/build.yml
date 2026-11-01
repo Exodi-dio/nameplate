@@ -62,7 +62,7 @@ jobs:
           fileName: "*-linux.zip"
           extract: true
           out-file-path: ./cli
-      - run: echo "$PWD/cli" >> $GITHUB_PATH
+      - run: chmod +x ./cli/geode && echo "$PWD/cli" >> $GITHUB_PATH
 
       - name: Merge platform geodes
         run: |
