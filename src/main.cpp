@@ -1,4 +1,5 @@
 #include <Geode/Geode.hpp>
+#include <Geode/utils/NodeIDs.hpp>
 #include "Render.hpp"
 #include "Popup.hpp"
 
@@ -11,7 +12,7 @@ class $modify(ProfilePage) {
 
         if (!score || !score->isCurrentUser()) return;
 
-        // Remove any old plate so reloading the page doesn't stack them.
+        // remove old plate
         auto old = this->getChildByID("nameplate"_spr);
         if (old) old->removeFromParent();
 
@@ -31,10 +32,10 @@ class $modify(ProfilePage) {
     bool init(int accountID, bool ownProfile) {
         if (!ProfilePage::init(accountID, ownProfile)) return false;
 
-        // Open the font/colour picker. Placed by the username label.
+        // open button
         auto btn = CCMenuItemSpriteExtra::create(
             CCSprite::createWithSpriteFrameName("GJ_editIcon_001.png"),
-            this, menu_selector(ProfilePage::onNameplate)
+            this, menu_selector(onNameplate)
         );
         btn->setID("nameplate-open"_spr);
         btn->setPosition({246.f, 126.f});
@@ -43,6 +44,7 @@ class $modify(ProfilePage) {
         return true;
     }
 
+    // open popup
     void onNameplate(CCObject*) {
         nameplate::Popup::create()->show();
     }

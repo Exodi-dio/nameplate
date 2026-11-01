@@ -16,13 +16,16 @@ struct Style {
     float scale = 1.f;
 };
 
+// load
 Style loadStyle();
+// save
 void saveStyle(Style const& style);
 
+// fonts
 std::vector<std::string> const& fontIds();
 std::string const& fontName(std::string const& id);
 
-// Draws text into a texture and returns it as a sprite. Never returns null.
+// draw text to sprite
 cocos2d::CCSprite* render(std::string const& text, Style const& style);
 
 } // namespace nameplate
